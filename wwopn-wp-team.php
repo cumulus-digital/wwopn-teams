@@ -1,10 +1,10 @@
 <?php
 /**
 * Plugin Name: WWOPN Team Members
-* Plugin URI: github.com/cumulus-digital/wwopn-wp-team
-* GitHub Plugin URI: cumulus-digital/wwopn-wp-team
+* Plugin URI: github.com/cumulus-digital/wwopn-teams
+* GitHub Plugin URI: cumulus-digital/wwopn-teams
 * Description: A plugin to create a team members
-* Version:  0.1
+* Version:  0.3
 * Author: Daniel Vena
 * Author URI: westwoodone.com
 * License: GPL2
