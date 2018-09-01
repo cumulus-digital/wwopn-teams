@@ -43,7 +43,7 @@ class CPT {
 					'name'                  => esc_html__( 'Team Members' ),
 					'singular_name'         => esc_html__( 'Team Member' ),
 					'menu_name'             => esc_html__( 'Team Members' ),
-					'name_admin_bar'        => esc_html__( 'Team Members' ),
+					'name_admin_bar'        => esc_html__( 'Team Member' ),
 					'all_items'             => esc_html__( 'All Team Members' ),
 					'add_new'               => esc_html__( 'Add New' ),
 					'add_new_item'          => esc_html__( 'Add New Team Member' ),
