@@ -250,8 +250,8 @@ class CPT {
 		$key = self::$metakeys['favoritePodcast'];
 
 		if (testPostValue($key, true)) {
-			$_POST[$key] = \sanitize_text_field($_POST[$key]);
-			\update_post_meta($post_id, $key, (string) $_POST[$key]);
+			$value = (string) \sanitize_text_field($_POST[$key]);
+			\update_post_meta($post_id, $key, $value);
 			return;
 		}
 
