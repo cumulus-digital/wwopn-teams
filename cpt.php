@@ -20,7 +20,9 @@ class CPT {
 
 		\add_filter('gutenberg_can_edit_post_type', [__CLASS__, 'editor_disableGutenberg'], 10, 2);
 
-		\add_action( 'wp_ajax_autosave_wwopn_podcast_meta', [__CLASS__, 'editor_meta_handleAutosave']);
+		\add_action('admin_enqueue_scripts', [__CLASS__, 'editor_loadScriptsAndStyles']);
+
+		\add_action( 'wp_ajax_autosave_wwopn_teams_meta', [__CLASS__, 'editor_meta_handleAutosave']);
 
 		self::$metakeys['favoritePodcast'] = '_' . PREFIX . '_meta_favoritePodcast';
 		\add_action('add_meta_boxes', [__CLASS__, 'editor_meta_favoritePodcast']);
@@ -98,6 +100,24 @@ class CPT {
 			'top'
 		);
 	}
+
+	/**
+	 * Register scripts and styles for the post editor
+	 * @param  string $hook
+	 * @return void
+	 */
+	static function editor_loadScriptsAndStyles($hook) {
+		if ($hook !== 'post-new.php' && $hook !== 'post.php') {
+			return;
+		}
+		$screen = \get_current_screen();
+		if ($screen->id !== PREFIX) {
+			return;
+		}
+
+		\wp_enqueue_script( PREFIX . '_editor_scripts', \plugin_dir_url(__FILE__) . 'assets/editor/scripts.js' );
+	}
+
 
 	/**
 	 * Strip whitespace at the end of Podcast post content
@@ -181,6 +201,7 @@ class CPT {
 		foreach(self::$meta_save_callbacks as $cb) {
 			$cb($_POST['post_ID']);
 		}
+		return true;
 	}
 
 	/**
@@ -211,7 +232,7 @@ class CPT {
 		<div class="wpn_meta_autosave">
 			<?=\wp_nonce_field($key, $key . '-nonce');?>
 			<label class="screen-reader-text" for="favorite_podcast">Team Member's Favorite Podcast</label>
-			<input class="wpn-meta-autosave" name="<?=$key?>" id="favorite_podcast" style="display:block;width:100%;height:2em;margin:12px 0 0;" value="<?=esc_attr($embed) ?>">
+			<input type="text" class="wpn-meta-autosave" name="<?=$key?>" id="favorite_podcast" style="display:block;width:100%;height:2em;margin:12px 0 0;" value="<?=esc_attr($embed) ?>">
 		</div>
 		<?php
 	}
@@ -229,6 +250,7 @@ class CPT {
 		$key = self::$metakeys['favoritePodcast'];
 
 		if (testPostValue($key, true)) {
+			$_POST[$key] = \sanitize_text_field($_POST[$key]);
 			\update_post_meta($post_id, $key, (string) $_POST[$key]);
 			return;
 		}

@@ -4,7 +4,7 @@
 * Plugin URI: github.com/cumulus-digital/wwopn-teams
 * GitHub Plugin URI: cumulus-digital/wwopn-teams
 * Description: A plugin to create a team members
-* Version:  0.5
+* Version:  0.7
 * Author: Daniel Vena
 * Author URI: westwoodone.com
 * License: GPL2
