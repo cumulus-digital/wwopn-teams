@@ -4,14 +4,14 @@
 * Plugin URI: github.com/cumulus-digital/wwopn-teams
 * GitHub Plugin URI: cumulus-digital/wwopn-teams
 * Description: A plugin to create a team members
-* Version:  0.4
+* Version:  0.5
 * Author: Daniel Vena
 * Author URI: westwoodone.com
 * License: GPL2
 */
 namespace WWOPN_Teams;
 
-const PLUGIN_NAME = 'wwopn-wp-teams';
+const PLUGIN_NAME = 'wwopn-teams';
 const PREFIX = 'wpn_teams';
 const TXTDOMAIN = PREFIX;
 const BASEPATH = PLUGIN_NAME;
