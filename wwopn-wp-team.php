@@ -4,7 +4,7 @@
 * Plugin URI: github.com/cumulus-digital/wwopn-teams
 * GitHub Plugin URI: cumulus-digital/wwopn-teams
 * Description: A plugin to create a team members
-* Version:  0.9
+* Version:  0.10
 * Author: Daniel Vena
 * Author URI: westwoodone.com
 * License: GPL2
@@ -22,6 +22,7 @@ require_once __DIR__ . '/helpers.php';
 require_once __DIR__ . '/cpt.php';
 require_once __DIR__ . '/team.php';
 require_once __DIR__ . '/role.php';
+require_once __DIR__ . '/shortcodes.php';
 
 /**
  * Flush permalinks on activation
@@ -58,3 +59,11 @@ function plugin_checkPermalinks() {
 }
 \add_action( 'admin_notices', __NAMESPACE__ . '\plugin_checkPermalinks' );
 
+function frontend_enqueueStyles() {
+	\wp_register_style(
+		PREFIX . '_style',
+		\plugin_dir_url(__FILE__) . 'assets/styles.css'
+	);
+	\wp_enqueue_style(PREFIX . '_style');
+}
+\add_action('wp_enqueue_scripts', __NAMESPACE__ . '\frontend_enqueueStyles');

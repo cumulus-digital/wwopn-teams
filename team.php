@@ -83,6 +83,7 @@ class Team {
 		if( ! is_admin() )
 			return;
 
+		return;
 		$orderby = $query->get('orderby');
 
 		if( 'slice' == $orderby ) {
