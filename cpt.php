@@ -86,6 +86,7 @@ class CPT {
 					'team',
 					PREFIX . '_role',
 				),
+				'exclude_from_search'   => true,
 			)
 		);
 	}
