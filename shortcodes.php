@@ -51,17 +51,17 @@ function shortcode_team($attr) {
 	// Get all images
 	$images = $wpdb->get_results("
 		SELECT
-			ipmeta.post_id,
-			ip.guid
+			ipmeta1.post_id,
+			ipmeta2.meta_value AS url
 		FROM
-			{$wpdb->postmeta} AS ipmeta
+			{$wpdb->postmeta} AS ipmeta1
 		INNER JOIN
-			{$wpdb->posts} AS ip
+			{$wpdb->postmeta} AS ipmeta2
 			ON
-				ipmeta.meta_value=ip.ID
+				ipmeta1.meta_value = ipmeta2.post_id
 		WHERE
-			ipmeta.post_id IN ({$ids})
-			AND ipmeta.meta_key = '_thumbnail_id'
+			ipmeta1.post_id IN ({$ids})
+			AND ipmeta1.meta_key = '_thumbnail_id'
 	");
 
 	// Get all role tags
@@ -77,10 +77,12 @@ function shortcode_team($attr) {
 	");
 
 	// Add image and roles to each team member
-	array_walk($team, function($member) use ($images, $roles) {
+	$upload_dir = \wp_get_upload_dir();
+	$upload_url = \trailingslashit($upload_dir['baseurl']);
+	array_walk($team, function($member) use ($images, $roles, $upload_url) {
 		foreach($images as $image) {
 			if ($image->post_id == $member->ID) {
-				$member->image = $image->guid;
+				$member->image = $upload_url . $image->url;
 				break;
 			}
 		}

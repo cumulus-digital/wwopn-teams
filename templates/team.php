@@ -11,9 +11,11 @@ namespace WWOPN_Teams;
 	<?php foreach($team as $member): ?>
 
 		<div class="member">
+			<?php if ($member->image): ?>
 			<figure>
 				<img src="<?php echo \esc_url($member->image) ?>" alt="">
 			</figure>
+			<?php endif ?>
 			<h3>
 				<?php
 					echo nl2br(
